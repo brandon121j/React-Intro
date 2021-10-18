@@ -1,19 +1,34 @@
-import React, { Component } from 'react'
-import Message from './components/Message'
-import './App.css';
+import React, { Component } from "react";
+import Message from "./components/Message";
+import "./App.css";
 
 export class App extends Component {
-    render() {
-        return (
-            <div>
-                <h1>Brandon Johnson</h1>
-                <Message name="Brandon" message="how is your day going?"/>
-                <Message name="Cat" message="did you eat yet?"/>
-                <Message name="ME" message="how was your weekend?"/>
-            </div>
-        )
-    }
+	render() {
+		return (
+			// <div style={{ textAlign: "center" }}
+			<div style={styles2.divFontSizeInPercent}>
+				<div style={styles.appDiv}>
+					<h1>Brandon Johnson</h1>
+					<Message name="Brandon" message="how is your day going?" num={1} />
+				</div>
+			</div>
+		);
+	}
 }
 
-export default App;
+const styles = {
+	appDiv: {
+		textAlign: "center",
+	},
+};
 
+const styles2 = {
+    divFontSize: {
+        fontSize: 50
+    },
+    divFontSizeInPercent: {
+        fontSize: "200%"
+    }
+};
+
+export default App;

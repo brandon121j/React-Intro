@@ -4,7 +4,7 @@ export class MessageChild extends Component {
     render() {
         return (
             <div>
-                My favorite number is ${this.props.num}
+                My favorite number is #{this.props.num}
             </div>
         )
     }
