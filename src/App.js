@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Message from "./components/Message";
 import "./App.css";
 
+
 export class App extends Component {
 	constructor(props) {
 		super(props);
@@ -10,6 +11,22 @@ export class App extends Component {
 			count: 0,
 			toggleMe: false,
 			email: "",
+			firstName: "",
+			lastName: "",
+			list: [
+				{
+					id: 1,
+					item: "bear"
+				},
+				{
+					id: 2,
+					item: "tiger"
+				},
+				{
+					id: 3,
+					item: "lion"
+				},
+			]
 		};
 	}
 
@@ -19,7 +36,7 @@ export class App extends Component {
 		});
 	};
 
-	subtract = () => {
+	minus = () => {
 		this.setState({
 			count: this.state.count - 1,
 		});
@@ -27,8 +44,9 @@ export class App extends Component {
 
 	toggleMe = () => {
 		// this.setState({
-		// 	toggleMe: !this.state.toggleMe
+		//   toggleMe: !this.state.toggleMe,
 		// });
+
 		this.setState((prevState) => {
 			return {
 				toggleMe: !prevState.toggleMe,
@@ -36,41 +54,137 @@ export class App extends Component {
 		});
 	};
 
-	handleEmailChange = (e) => {
+	handleEmailChange = (event) => {
 		this.setState({
-			email: e.target.value
+			email: event.target.value,
+		});
+	};
+
+	handleFirstNameChange = (event) => {
+		this.setState({
+			firstName: event.target.value,
+		});
+	};
+
+	handleOnSubmit = (event) => {
+		event.preventDefault();
+		console.log(this.state);
+	};
+
+	handleLastNameChange = (event) => {
+		this.setState({
+			lastName: event.target.value,
+		});
+	};
+
+	handleClickMe = () => {
+		console.log(this.state);
+	};
+
+	handleSecondFormSubmit = (event) => {
+		event.preventDefault();
+
+		console.log(this.state);
+	};
+
+	handleSecondFormOnChange = (event) => {
+		console.log(event.target.name, event.target.value);
+		this.setState({
+			[event.target.name]: event.target.value,
 		});
 	};
 
 	render() {
 		return (
-			// <div style={{ textAlign: "center" }}
-			<div style={styles2.divFontSizeInPercent}>
-				<div style={styles.appDiv}>
-					<h1>Brandon Johnson</h1>
-					<Message name="Brandon" message="how is your day going?" num={1} />
-					<hr />
-					<div>
-						Count: { this.state.count }
-						<div>
-							<button onClick={this.add}>+</button>
-							<button onClick={this.subtract}>-</button>
-						</div>
-					</div>
-					<div>
-						<div
-							style={{
-								height: 50,
-								backgroundColor: this.state.toggleMe ? "blue" : "red",
-							}}
-						>
-							<button onClick={this.toggleMe}>Toggle me</button>
-						</div>
-					</div>
-				</div>
+			// <div className="App">
+			// <div style={styles.appDiv}>
+			<div style={{ textAlign: "center" }}>
+				<Message
+					name="class"
+					message="how is your day going?"
+					num={this.state.count}
+				/>
+				<hr />
 				<div>
-					<input name="email" value={this.state.email} onChange={this.handleEmailChange}></input>
+					Count: {this.state.count}
+					<div>
+						<button onClick={this.add}>+</button>
+						<button onClick={this.minus}>-</button>
+					</div>
 				</div>
+				<hr />
+				<div>
+					<div
+						style={{
+							height: 50,
+							backgroundColor: this.state.toggleMe ? "blue" : "red",
+						}}
+					>
+						<button onClick={this.toggleMe}>Toggle me</button>
+					</div>
+				</div>
+				<hr />
+				<div>
+					<input
+						name="email"
+						value={this.state.email}
+						onChange={this.handleEmailChange}
+					/>
+					<br />
+					{this.state.email}
+				</div>
+				<hr />
+				<form onSubmit={this.handleOnSubmit}>
+					<input
+						name="firstName"
+						value={this.state.firstName}
+						onChange={this.handleFirstNameChange}
+					/>
+					<button>Submit</button>
+				</form>
+				<hr />
+				<input
+					name="lastName"
+					value={this.state.lastName}
+					onChange={this.handleLastNameChange}
+				/>
+				<button onClick={this.handleClickMe}>Click Me</button>
+				<hr />
+				<form onSubmit={this.handleSecondFormSubmit}>
+					<input
+						name="email"
+						value={this.state.email}
+						onChange={this.handleSecondFormOnChange}
+					/>
+					<input
+						name="firstName"
+						value={this.state.firstName}
+						onChange={this.handleSecondFormOnChange}
+					/>
+					<input
+						name="lastName"
+						value={this.state.lastName}
+						onChange={this.handleSecondFormOnChange}
+					/>
+					<button>Form 2 Submit</button>
+				</form>
+				<hr/>
+
+				<ul>
+					{/* {
+						this.state.list.map((animals) => {
+							return(
+								<li>
+									{animals.item}
+								</li>
+							)
+						})
+					} */}
+
+					{this.state.list.map(({ item, id}) => (
+						<li key={id}>{item}</li>
+					))}
+				</ul>
 			</div>
 		);
 	}
@@ -79,15 +193,6 @@ export class App extends Component {
 const styles = {
 	appDiv: {
 		textAlign: "center",
-	},
-};
-
-const styles2 = {
-	divFontSize: {
-		fontSize: 50,
-	},
-	divFontSizeInPercent: {
-		fontSize: "200%",
 	},
 };
 
