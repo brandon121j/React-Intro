@@ -1,87 +1,30 @@
 import React, { Component } from "react";
-
+import axios from "axios";
 import "./App.css";
 
 export class App extends Component {
-    state = {
-        message: "....loading",
-        backgroundColor: "orange",
-        toggelShowMe: true
-    };
+	state = {
+		name: "",
+	};
 
-    componentDidMount() {
-        //make ajax call to a server or an api
+	async componentDidMount() {
+		try {
+			let result = await axios.get("https://pokeapi.co/api/v2/pokemon/ditto");
+			console.log(result.data);
+			//1. Get the picture to show up
+			//2. Get the abilities to show up
+			//3. HOW CAN YOU MAKE THIS DYNAMIC - YOU WILL NEED AN INPUT and a BUTTON
+			this.setState({
+				name: result.data.name,
+			});
+		} catch (e) {
+			console.log(e);
+		}
+	}
 
-        setTimeout(() => {
-        this.setState({
-            message: "component did mount executed! so the message is changed",
-            backgroundColor: "red",
-        });
-        }, 2000);
-    }
-
-    handleClickMe = () => {
-        this.setState({
-        message: "clicked",
-        });
-    };
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log(prevState);
-        if (prevState.message !== this.state.message) {
-            setTimeout(() => {
-                this.setState({
-                backgroundColor: "blue",
-                message:
-                    "Component Did Update executed!!! so the message is changed again",
-                });
-            }, 2000);
-        }
-
-        // if (
-        //   prevState.message === "Component Did Update executed!!! so the message is changed again"
-        // ) {
-        //   console.log("hello class");
-        //   this.setState({ color: "pink" });
-        // }
-    }
-
-    toggelShowMe = () => {
-        this.setState((prevState) => {
-            return {
-                toggelShowMe : !prevState.toggelShowMe
-            }
-        })
-    }
-
-    render() {
-        return (
-        <div
-            className="App"
-            style={{ backgroundColor: this.state.backgroundColor }}
-        >
-            <h1>{this.state.message}</h1>
-            <button onClick={this.handleClickMe}>Click Me</button>
-            <hr />
-            <div style={{backgroundColor : "white"}}>
-                {this.state.toggelShowMe === true ? <ShowMe /> : ""}
-                <button onClick={this.toggelShowMe}>Toggle Me</button>
-            </div>
-            
-        </div>
-        );
-    }
-}
-
-class ShowMe extends Component{
-    state = {
-        showMeMessage : "Show me Component"
-    }
-
-    render(){
-        return <div>{this.state.showMeMessage}</div>
-    }
-        
+	render() {
+		return <div className="App">{this.state.name}</div>;
+	}
 }
 
 export default App;
