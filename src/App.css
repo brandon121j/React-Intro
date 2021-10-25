@@ -36,3 +36,57 @@
     transform: rotate(360deg);
   }
 }
+
+.card {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 500px;
+  width: 350px;
+  border: 2px solid black;
+  margin: 10px
+}
+
+.heroContent {
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.form {
+  padding: 25px;
+}
+
+.form label {
+  margin-right: 10px;
+  font-size: large;
+}
+
+.form input {
+  padding: 10px;
+}
+
+.form button {
+  margin-left: 2px;
+  padding: 10px;
+  background-color: white;
+  color: #0039D7;
+  border: 1px solid #0039D7;
+  outline: none; 
+}
+
+.form button:hover {
+  cursor: pointer;
+  background-color: #0039D7;
+  color: white;
+}
+
+button:focus {
+  outline:none;
+  box-shadow: none;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: none;
+}
