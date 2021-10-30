@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Pokemon from "./components/pokemon/Pokemon";
 import MainPokemon from "./components/MainPokemon/MainPokemon";
 import MainPokemonDetail from "./components/MainPokemon/MainPokemonDetail";
 
